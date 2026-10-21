@@ -8,13 +8,13 @@
 
 #if os(iOS)
 import UIKit
-import MobileCoreServices
 #elseif os(OSX)
 import AppKit
 #endif
 
 import ImageIO
 import AVFoundation
+import UniformTypeIdentifiers
 
 public typealias TimePoint = CMTime
 public typealias ProgressHandler = (Double) -> Void
@@ -331,7 +331,7 @@ public struct Regift {
             fileURL = URL(fileURLWithPath: temporaryFile)
         }
         
-        guard let destination = CGImageDestinationCreateWithURL(fileURL! as CFURL, kUTTypeGIF, frameCount, nil) else {
+        guard let destination = CGImageDestinationCreateWithURL(fileURL! as CFURL, UTType.gif.identifier as CFString, frameCount, nil) else {
             throw RegiftError.DestinationNotFound
         }
         
